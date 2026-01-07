@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Issued Books</h1>
+<table>
+    <tr>
+        <th>ID</th><th>Book</th><th>Member</th><th>Issued On</th><th>Returned On</th><th>Action</th>
+    </tr>
+    {% for row in issued %}
+    <tr>
+        <td>{{ row[0] }}</td>
+        <td>{{ row[1] }}</td>
+        <td>{{ row[2] }}</td>
+        <td>{{ row[3] }}</td>
+        <td>{{ row[4] if row[4] else 'Not Returned' }}</td>
+        <td>
+            {% if not row[4] %}
+                <a href="/return_book/{{ row[0] }}"><button>Return</button></a>
+            {% else %}
+                Returned
+            {% endif %}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}
